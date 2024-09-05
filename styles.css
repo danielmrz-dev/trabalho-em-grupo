@@ -39,12 +39,34 @@ body {
     padding: 0.5rem;
 }
 
-button {
-    background-color: transparent;
-    padding: 0 0.25rem;
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 
-#checkbox:checked ~ .titulo-tarefa {
+.checkbox-container > label {
+    cursor: pointer;
+}
+
+.editar, .excluir {
+    background-color: transparent;
+    padding: .75rem;
+    cursor: pointer;
+    border: none;
+}
+
+.editar {
+    background: url("assets/edit.svg") center center no-repeat;
+    background-size: 17px;
+}
+
+.excluir {
+    background: url("assets/delete.svg") center center no-repeat;
+    background-size: 17px;
+}
+
+input[type="checkbox"]:checked + .titulo-tarefa {
     text-decoration: line-through;
 }
 
@@ -53,9 +75,15 @@ button {
     padding: 0.5rem;
 }
 
+.filtro {
+    display: flex;
+    gap: .25rem;
+}
+
 img {
     width: 10px;
-    height: 10px;
+    height: 10px;    
+    opacity: 0;
 }
 
 .lista {
