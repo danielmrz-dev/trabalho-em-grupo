@@ -4,13 +4,14 @@ const listadDeTarefas = document.querySelector(".lista");
 const deletarTarefa = document.querySelector(".excluir");
 const filtroForm = document.querySelector(".filtro")
 const inputFiltro = document.querySelector(".input-filtro");
+const limparFiltro = document.querySelector(".limpar-filtro");
 
 const tarefas = [];
 
 function renderizaTarefas() {
     tarefas.forEach((tarefa) => {
         listadDeTarefas.innerHTML += `
-            <li class="list-item">
+            <li class="list-item" id="${tarefa.id}">
                 <div class="checkbox-container">
                     <input type="checkbox" name="" id="checkbox${tarefa.id}">
                     <label for="checkbox${tarefa.id}" class="titulo-tarefa">${tarefa.id}. ${tarefa.descricao}</label>
@@ -53,12 +54,26 @@ formulario.addEventListener("submit", (e) => {
     inputTexto.focus();
 })
 
-
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("excluir")) {
-        e.target.closest(".list-item").remove();
+
+        const listItem = e.target.closest(".list-item");
+        const id = Number(listItem.id);
+        listItem.remove();
+
+
+        const index = tarefas.findIndex((tarefa) => tarefa.id === id);
+        if (index !== -1) {
+            tarefas.splice(index, 1);
+            tarefas.forEach((tarefa, i) => {
+                tarefa.id = i + 1;
+            });
+            listadDeTarefas.innerHTML = ''
+            renderizaTarefas();
+        }
     }
-})
+});
+
 
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("editar")) {
@@ -70,6 +85,11 @@ document.addEventListener("click", (e) => {
 
 filtroForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    if (inputFiltro.value === "0" || inputFiltro.value.length <= 0 || inputFiltro.value > tarefas.length) {
+        alert("Por favor, digite um id válido para filtrar a tarefa!")
+        return;
+    }
 
     const idDigitado = Number(inputFiltro.value);
     const tarefaFiltrada = tarefas.find((tarefa) => tarefa.id === idDigitado);
@@ -83,7 +103,7 @@ filtroForm.addEventListener("submit", (e) => {
 
 function renderizaTarefaFiltrada(tarefa) {
     return `
-            <li class="list-item">
+            <li class="list-item" id="${tarefa.id}">
                 <div class="checkbox-container">
                     <input type="checkbox" name="" id="checkbox${tarefa.id}">
                     <label for="checkbox${tarefa.id}" class="titulo-tarefa">${tarefa.id}. ${tarefa.descricao}</label>
@@ -101,6 +121,11 @@ function renderizaTarefaFiltrada(tarefa) {
     `
 }
 
+limparFiltro.addEventListener("click", (e) => {
+    e.preventDefault()
+    listadDeTarefas.innerHTML = "";
+    renderizaTarefas();
+})
 
 
 

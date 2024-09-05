@@ -37,6 +37,7 @@ body {
 
 .text-input {
     padding: 0.5rem;
+    width: 100%;
 }
 
 .checkbox-container {
@@ -78,6 +79,10 @@ input[type="checkbox"]:checked + .titulo-tarefa {
 .filtro {
     display: flex;
     gap: .25rem;
+}
+
+.input-filtro {
+    padding: .5rem;
 }
 
 img {
