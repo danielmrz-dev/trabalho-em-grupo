@@ -35,7 +35,7 @@ Não haverá a persistência dos itens da lista de supermercado em banco de dado
 # Resultado final
 
 Screenshot
-[](assets/screenshot.png)
+![](assets/screenshot.png)
 
 [Link do Deploy](https://danielmrz-dev.github.io/trabalho-em-grupo/)
 
