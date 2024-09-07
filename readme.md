@@ -1,4 +1,4 @@
-# SANTANDER CODERS 2024
+# Trabalho em Grupo - SANTANDER CODERS 2024
 
 - Trabalho em grupo feito ao longo do módulo de Lógica de Programação na formação Santander Coders 2024 (Trilha de Front-end).
 
