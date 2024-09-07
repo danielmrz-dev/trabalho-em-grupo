@@ -120,6 +120,7 @@ filtroForm.addEventListener("submit", (e) => {
         return;
     }
 
+
     const idDigitado = Number(inputFiltro.value);
     const produtoFiltrada = produtos.find((produto) => produto.id === idDigitado);
 
