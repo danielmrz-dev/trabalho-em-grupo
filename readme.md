@@ -12,11 +12,11 @@
 # Professor
 - [Bruno Cabral](https://github.com/bruno88cabral)
 
-# Exercício - Lista de supermercado
+## Descrição do exercício - Lista de supermercado
 
 Desenvolver, utilizando os conceitos abordados ao longo do módulo, uma aplicação de lista de supermercado.
 
-## Requisitos
+# Requisitos
 
 Dentre as funcionalidades, espera-se que seja possível:
 
@@ -32,3 +32,15 @@ Não haverá a persistência dos itens da lista de supermercado em banco de dado
 
 **Uma dica:** Faça o **básico funcionar** e **depois** se sobrar tempo **pense melhorias**.
 
+# Resultado final
+
+Screenshot
+[](assets/screenshot.png)
+
+[Link do Deploy](https://danielmrz-dev.github.io/trabalho-em-grupo/)
+
+# Tecnologias utilizadas
+
+- HTML Semântico
+- CSS
+- Javascript
