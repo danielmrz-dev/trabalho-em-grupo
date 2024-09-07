@@ -1,11 +1,14 @@
+/* Reset do CSS */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Gerais */
+
 :root {
-    --cor1: #984d32;
     --fonte-primaria: "Poppins", sans-serif;
 }
 
@@ -15,30 +18,130 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #db8bd1;
+    background-color: #171022;
 }
 
+/* Container (<main>) que envelopa todo conteúdo */
+
 .container {
-    background-color: aquamarine;
+    background-color: #2c243b;
     padding: 2rem;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-
+    min-height: 600px;
 }
+
+/* Título da página */
+
+.icone-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;    
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.7rem;
+    font-variant: small-caps;
+    color: white;
+}
+
+/* Campo e botão para adição de nova Tarefa */
 
 .formulario {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5em;
+    min-width: 325px;
+    max-width: 325px; 
 }
 
-.text-input {
+.input-adicionar {
+    font-family: var(--fonte-primaria);
     padding: 0.5rem;
     width: 100%;
+    border-radius: 5px;
+    outline-style: none;
 }
+
+input[type=text]:focus {
+    border: 2px solid;
+    border-color: lime; 
+}
+
+.btn-adicionar-produto {
+    font-family: var(--fonte-primaria);
+    font-weight: 500;
+    background-color: #8b42da;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* Campo e botões para pesquisa de tarefa por id */
+
+.filtro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    min-width: 325px;
+    max-width: 325px; 
+}
+
+.input-filtro {
+    font-family: var(--fonte-primaria);
+    padding: .5rem;
+    width: 100%;
+    border-radius: 5px;    
+    outline-style: none;    
+}
+
+input[type=number]:focus {
+    border: 2px solid;
+    border-color: lime; 
+}
+
+.btn-filtrar, .btn-limpar-filtro {
+    font-family: var(--fonte-primaria);
+    font-weight: 500;
+    color: white;
+    background-color: #8b42da;
+    border-radius: 5px;
+    border-style: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* UL e LI's onde as tarefas são renderizadas */
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    list-style: none;    
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 3.5px 10px;
+    min-width: 325px;
+    max-width: 325px;    
+}
+
+/* Botão check box das LI's */
 
 .checkbox-container {
     display: flex;
@@ -50,54 +153,37 @@ body {
     cursor: pointer;
 }
 
+
+input[type="checkbox"]:checked + .titulo-produto {
+    text-decoration: line-through;
+}
+
+/* Botões editar e excluir das LI's */
+
+.btns-container {
+    display: flex;
+    align-items: center;
+}
+
+/* img {
+    width: 10px;
+    height: 10px;    
+    opacity: 0;
+} */
+
 .editar, .excluir {
     background-color: transparent;
-    padding: .75rem;
+    padding: .85rem;
     cursor: pointer;
     border: none;
 }
 
 .editar {
     background: url("assets/edit.svg") center center no-repeat;
-    background-size: 17px;
+    background-size: 20px;
 }
 
 .excluir {
     background: url("assets/delete.svg") center center no-repeat;
     background-size: 17px;
-}
-
-input[type="checkbox"]:checked + .titulo-tarefa {
-    text-decoration: line-through;
-}
-
-.btn-adicionar-tarefa {
-    border-radius: 5px;
-    padding: 0.5rem;
-}
-
-.filtro {
-    display: flex;
-    gap: .25rem;
-}
-
-.input-filtro {
-    padding: .5rem;
-}
-
-img {
-    width: 10px;
-    height: 10px;    
-    opacity: 0;
-}
-
-.lista {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }

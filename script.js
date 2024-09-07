@@ -1,29 +1,34 @@
 const formulario = document.querySelector(".formulario");
-const inputTexto = document.querySelector(".text-input");
-const listadDeTarefas = document.querySelector(".lista");
-const deletarTarefa = document.querySelector(".excluir");
+const inputTexto = document.querySelector(".input-adicionar");
+const listadDeProdutos = document.querySelector(".lista");
+const deletarproduto = document.querySelector(".excluir");
 const filtroForm = document.querySelector(".filtro")
 const inputFiltro = document.querySelector(".input-filtro");
-const limparFiltro = document.querySelector(".limpar-filtro");
+const limparFiltro = document.querySelector(".btn-limpar-filtro");
 
-const tarefas = [];
+const produtos = [];
 
-function renderizaTarefas() {
-    tarefas.forEach((tarefa) => {
-        listadDeTarefas.innerHTML += `
-            <li class="list-item" id="${tarefa.id}">
+function renderizaprodutos() {
+    produtos.forEach((produto) => {
+        listadDeProdutos.innerHTML += `
+            <li class="list-item" id="${produto.id}">
                 <div class="checkbox-container">
-                    <input type="checkbox" name="" id="checkbox${tarefa.id}">
-                    <label for="checkbox${tarefa.id}" class="titulo-tarefa">${tarefa.id}. ${tarefa.descricao}</label>
+                    <input type="checkbox" name="" id="checkbox${produto.id}">
+                    <label for="checkbox${produto.id}" class="titulo-produto">${produto.id}. ${produto.descricao}</label>
                 </div>
                 
                 <div class="btns-container">
+                    <abbr title="Editar produto">
                     <button class="editar">
                         
-                    </button>
+                    </button>                    
+                    </abbr>
+                    
+                    <abbr title="Excluir produto">
                     <button class="excluir">
                         
-                    </button>
+                    </button>                    
+                    </abbr>
                 </div>
             </li>
     ` 
@@ -33,26 +38,34 @@ function renderizaTarefas() {
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if (inputTexto.value === "" || inputTexto.value.length <= 3) {
-        alert("Por favor, digite uma descrição válida!")
+    if (inputTexto.value === "" || inputTexto.value.length < 3) {
+        alert("A descrição do produto deve ter pelo menos 3 caracteres!");
         return;
     }
-    
-    const idTarefa = tarefas.length + 1;
-    const textoDigitado = inputTexto.value;
 
-    const novaTarefa = {
-        id: idTarefa,
-        descricao: textoDigitado,
-        concluida: false
+    const textoDigitado = inputTexto.value.trim();
+
+    const produtoExistente = produtos.find(produto => produto.descricao.toLowerCase() === textoDigitado.toLowerCase());
+    if (produtoExistente) {
+        alert("O produto já foi adicionado!");
+        inputTexto.value = "";
+        return;
     }
 
-    tarefas.push(novaTarefa);
-    listadDeTarefas.innerHTML = ""
-    renderizaTarefas();
+    const idproduto = produtos.length + 1;
+
+    const novoProduto = {
+        id: idproduto,
+        descricao: textoDigitado,
+    };
+
+    produtos.push(novoProduto);
+    listadDeProdutos.innerHTML = "";
+    renderizaprodutos();
     inputTexto.value = "";
     inputTexto.focus();
-})
+});
+
 
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("excluir")) {
@@ -62,51 +75,67 @@ document.addEventListener("click", (e) => {
         listItem.remove();
 
 
-        const index = tarefas.findIndex((tarefa) => tarefa.id === id);
+        const index = produtos.findIndex((produto) => produto.id === id);
         if (index !== -1) {
-            tarefas.splice(index, 1);
-            tarefas.forEach((tarefa, i) => {
-                tarefa.id = i + 1;
+            produtos.splice(index, 1);
+            produtos.forEach((produto, i) => {
+                produto.id = i + 1;
             });
-            listadDeTarefas.innerHTML = ''
-            renderizaTarefas();
+            listadDeProdutos.innerHTML = ''
+            renderizaprodutos();
         }
     }
 });
 
-
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("editar")) {
-        const tarefaEditada = prompt("Digite a nova descrição da tarefa:");
-        const descricaoAtual = e.target.closest(".list-item").querySelector(".titulo-tarefa");  
-        descricaoAtual.textContent = tarefaEditada;
+        let produtoEditada = prompt("Digite a nova descrição da produto:");
+                
+        if (produtoEditada !== null) {
+            produtoEditada = produtoEditada.trim();
+
+            if (produtoEditada.length < 3) {
+                alert("A descrição do produto deve ter pelo menos 3 caracteres!");                
+                return;
+            }
+
+            const produtoExistente = produtos.find(produto => produto.descricao.toLowerCase() === produtoEditada.toLowerCase());
+            if (produtoExistente) {
+                alert("O produto já existe na lista!");
+                inputTexto.value = "";
+                return;
+            }
+            
+            const descricaoAtual = e.target.closest(".list-item").querySelector(".titulo-produto");
+            descricaoAtual.textContent = `${descricaoAtual.textContent.split('.')[0]}. ${produtoEditada}`;
+        }
     }
-})
+});
 
 filtroForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if (inputFiltro.value === "0" || inputFiltro.value.length <= 0 || inputFiltro.value > tarefas.length) {
-        alert("Por favor, digite um id válido para filtrar a tarefa!")
+    if (inputFiltro.value === "0" || inputFiltro.value.length <= 0 || inputFiltro.value > produtos.length) {
+        alert("Por favor, digite um id válido para filtrar a produto!")
         return;
     }
 
     const idDigitado = Number(inputFiltro.value);
-    const tarefaFiltrada = tarefas.find((tarefa) => tarefa.id === idDigitado);
+    const produtoFiltrada = produtos.find((produto) => produto.id === idDigitado);
 
-    listadDeTarefas.innerHTML = '';
+    listadDeProdutos.innerHTML = '';
     inputFiltro.value = '';
-    console.log(tarefaFiltrada);
+    console.log(produtoFiltrada);
     
-    listadDeTarefas.innerHTML = renderizaTarefaFiltrada(tarefaFiltrada)
+    listadDeProdutos.innerHTML = renderizaprodutoFiltrada(produtoFiltrada)
 })
 
-function renderizaTarefaFiltrada(tarefa) {
+function renderizaprodutoFiltrada(produto) {
     return `
-            <li class="list-item" id="${tarefa.id}">
+            <li class="list-item" id="${produto.id}">
                 <div class="checkbox-container">
-                    <input type="checkbox" name="" id="checkbox${tarefa.id}">
-                    <label for="checkbox${tarefa.id}" class="titulo-tarefa">${tarefa.id}. ${tarefa.descricao}</label>
+                    <input type="checkbox" name="" id="checkbox${produto.id}">
+                    <label for="checkbox${produto.id}" class="titulo-produto">${produto.id}. ${produto.descricao}</label>
                 </div>
                 
                 <div class="btns-container">
@@ -123,14 +152,6 @@ function renderizaTarefaFiltrada(tarefa) {
 
 limparFiltro.addEventListener("click", (e) => {
     e.preventDefault()
-    listadDeTarefas.innerHTML = "";
-    renderizaTarefas();
+    listadDeProdutos.innerHTML = "";
+    renderizaprodutos();
 })
-
-
-
-
-
-
-
-

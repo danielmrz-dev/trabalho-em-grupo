@@ -7,22 +7,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <title>Lista de tarefas</title>
+    <title>Lista de Supermercado</title>
+    <link rel="shortcut icon" href="/assets/market-icon.png" type="image/x-icon">
 </head>
 <body>
     <main class="container">
-        <h1>Lista de tarefas</h1>
+        
+        <div class="icone-titulo">
+            <img src="/assets/market-icon.png" width="30px" height="30px">
+            <h1>Lista de Supermercado</h1>
+        </div>
         
         <form class="formulario">
-            <input type="text" name="" id="" placeholder="Adicione sua tarefa" class="text-input">
-            <button class="btn-adicionar-tarefa">Adicionar</button>       
+            <input type="text" name="" id="" placeholder="Adicione um produto" class="input-adicionar">
+            <button class="btn-adicionar-produto">Adicionar</button>       
         </form>
 
         <form class="filtro">
-            <input type="number" class="input-filtro" placeholder="Digite o id da tarefa">
+            <input type="number" class="input-filtro" placeholder="Digite o id do produto">
             <button class="btn-filtrar">Filtrar</button>
-            <button class="limpar-filtro">Limpar filtro</button>
-        </form>
+            <button class="btn-limpar-filtro">Limpar</button>
+        </form>        
 
         <ul class="lista">
             
